@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matemáticas Básicas · Teorema del seno | Universidad Nueva Granada</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{--ink:#1c2340;--accent:#0d9488;--accent-soft:#f0fdfa;--line:#e4e8f2;--muted:#6b7280;--panel:#fff;--uni:#7a44ff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f6f8fc;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+  .topbar{background:var(--panel);border-bottom:1px solid var(--line)}
+  .topbar .wrap{height:64px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;letter-spacing:-.5px}
+  .brand .cube{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#0d9488,#2563eb);color:#fff;display:grid;place-items:center;font-size:17px;font-weight:900}
+  .brand small{display:block;font-size:11px;color:var(--muted);font-weight:600;letter-spacing:0}
+  .prof{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
+  .prof .dot{width:8px;height:8px;border-radius:50%;background:#22c55e}
+  .hero{background:var(--panel);border-bottom:1px solid var(--line)}
+  .hero .wrap{padding:34px 20px 28px}
+  .crumbs{font-size:13px;color:var(--muted);margin-bottom:10px}
+  .crumbs b{color:var(--uni)}
+  h1{font-size:32px;letter-spacing:-1px;margin-bottom:8px;line-height:1.15}
+  .intro{max-width:860px;color:#3a4363;font-size:15px}
+  .intro p+p{margin-top:8px}
+  .docente{display:inline-flex;align-items:center;gap:10px;margin-top:16px;background:var(--accent-soft);border:1px solid #99f6e4;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:700;color:var(--accent)}
+  .docente .avatar{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}
+  .formulas{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .formulas span{background:var(--accent-soft);border:1px solid #99f6e4;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:700;color:#115e59}
+  .searchbox{margin:26px 0 6px}
+  .searchbox input{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:var(--panel);font-family:inherit;outline:none}
+  .searchbox input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(13,148,136,.12)}
+  .resultcount{font-size:13px;color:var(--muted);margin:8px 2px 0}
+  .scorebar{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+  .scorepill{background:#ecfdf3;color:#15803d;border:1px solid #bbf7d0;border-radius:999px;padding:4px 12px;font-weight:800}
+  .btn{padding:9px 16px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;border:2px solid var(--line);background:#fff;color:var(--ink)}
+  .btn:hover{border-color:var(--accent)}
+  .btn.solid{border-color:var(--accent);background:var(--accent);color:#fff}
+  .skills{gap:18px;display:flex;flex-direction:column;margin:18px 0 60px}
+  .cat{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:visible;box-shadow:0 1px 2px rgba(16,24,64,.04)}
+  .cat-head{display:flex;align-items:center;gap:14px;padding:16px 20px;border-left:6px solid var(--cc);border-radius:14px 14px 0 0}
+  .cat-letter{width:38px;height:38px;border-radius:50%;background:var(--cc);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;flex:0 0 auto}
+  .cat-head h2{font-size:19px;letter-spacing:-.3px}
+  .cat-head .count{font-size:12px;color:var(--muted);font-weight:600}
+  .cat-skills{list-style:none}
+  .skill{position:relative;display:flex;align-items:center;gap:14px;padding:11px 20px;border-top:1px solid var(--line);cursor:pointer;transition:background .12s}
+  .skill:hover{background:#f7f9ff}
+  .skill.sel{background:var(--accent-soft)}
+  .skill-code{flex:0 0 52px;font-size:12px;font-weight:800;color:var(--cc);letter-spacing:.4px}
+  .skill-name{flex:1;font-size:15px;color:var(--ink)}
+  .hint{font-size:12px;font-weight:700;color:var(--accent);opacity:0;transition:opacity .12s;white-space:nowrap}
+  .skill:hover .hint{opacity:1}
+  .pop{position:absolute;left:56%;top:-8px;width:350px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 34px rgba(16,24,64,.16);padding:14px 16px;z-index:30;opacity:0;pointer-events:none;transform:translateY(4px);transition:.16s}
+  .skill:hover .pop{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .pop .q-label{font-size:11px;font-weight:800;letter-spacing:.6px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+  .pop .q{font-size:14px;color:var(--ink);font-weight:600;margin-bottom:10px;line-height:1.5}
+  .pop .answers{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .pop .ans{border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;font-weight:600;color:var(--ink);text-align:center;word-break:break-word}
+  .pop .ans.ok{border-color:#22c55e;background:#ecfdf3;color:#15803d}
+  .pop .caret{position:absolute;left:-6px;top:18px;width:12px;height:12px;background:var(--panel);border-left:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+  @media(max-width:720px){.hint{display:none}.prof{display:none}.docente{font-size:12px;padding:7px 12px}.pop{position:fixed;left:16px;top:auto;bottom:14px;width:calc(100% - 32px);transform:none;max-height:70vh;overflow:auto}.pop .caret{display:none}}
+  .modal{position:fixed;inset:0;background:rgba(16,22,48,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:opacity .18s}
+  .modal.open{opacity:1;pointer-events:auto}
+  .modal-card{background:#fff;border-radius:16px;width:100%;max-width:560px;max-height:90vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.3);transform:translateY(8px);transition:transform .18s}
+  .modal.open .modal-card{transform:translateY(0)}
+  .modal-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line)}
+  .modal-head h3{font-size:19px;flex:1}
+  .modal-x{border:none;background:#eef0f6;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer;line-height:1;color:var(--ink)}
+  .modal-body{padding:22px}
+  .modal-foot{display:flex;gap:10px;justify-content:flex-end;padding:0 22px 20px;flex-wrap:wrap}
+  .prac-q{font-size:18px;font-weight:700;margin-bottom:6px}
+  .prac-sub{font-size:15px;color:#4b5675;margin-bottom:16px;line-height:1.6}
+  .prac-ans{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  @media(max-width:520px){.prac-ans{grid-template-columns:1fr}}
+  .prac-ans button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s;word-break:break-word}
+  .prac-ans button:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .prac-ans button.good{border-color:#22c55e;background:#ecfdf3;color:#15803d}
+  .prac-ans button.bad{border-color:#ef4444;background:#fef2f2;color:#b91c1c}
+  .prac-ans button:disabled{cursor:default}
+  .prac-fb{font-weight:700;margin-bottom:14px;min-height:20px}
+  .prac-fb.good{color:#15803d}
+  .prac-fb.bad{color:#b91c1c}
+  .toast-wrap{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;z-index:200;align-items:center;pointer-events:none}
+  .toast{background:#141a33;color:#fff;padding:11px 18px;border-radius:10px;font-size:14px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.28);opacity:0;transform:translateY(10px);transition:.2s}
+  .toast.show{opacity:1;transform:translateY(0)}
+  footer{background:#141a33;color:#b9c2da;font-size:13px;margin-top:20px}
+  footer .wrap{padding:34px 20px;text-align:center}
+  footer .name{color:#fff;font-weight:700}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="cube">△</div>
+      <div>Matemáticas Básicas<small>Universidad Nueva Granada</small></div>
+    </div>
+    <div class="prof"><span class="dot"></span>Prof. F. Giovanny Quiazúa M.</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs"><b>Universidad Nueva Granada</b> › Matemáticas Básicas › Teorema del seno</div>
+    <h1>Matemáticas Básicas · Teorema del seno</h1>
+    <div class="intro">
+      <p>Lista de competencias sobre el <b>teorema del seno</b> (ley de los senos): relación entre lados y ángulos opuestos en cualquier triángulo, identificación de casos (AAL, ALA, LLA), cálculo de lados y ángulos desconocidos, y nociones del caso ambiguo.</p>
+      <p>Ubica el cursor sobre una competencia para ver una pregunta de ejemplo y haz clic para practicar; la plataforma guarda tus aciertos.</p>
+    </div>
+    <div class="formulas">
+      <span>$\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}$</span>
+      <span>$a$ opuesto a $A$, $b$ a $B$, $c$ a $C$</span>
+      <span>$A+B+C=180^\circ$</span>
+      <span>Casos: AAL, ALA, LLA</span>
+    </div>
+    <div class="docente"><span class="avatar">FG</span>Docente: F. Giovanny Quiazúa M.</div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="searchbox">
+    <input id="search" type="search" placeholder="Buscar una competencia (ej. ley de senos, lado, ángulo, ALA, ambiguo...)">
+  </div>
+  <div class="resultcount" id="rc"></div>
+  <div class="scorebar">
+    <span>Tu puntuación:</span>
+    <span class="scorepill" id="scorePill">0 / 0</span>
+    <button class="btn" type="button" id="resetScore" style="padding:5px 12px">Reiniciar</button>
+  </div>
+  <div class="skills" id="skills"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Universidad Nueva Granada · Curso de Matemáticas Básicas · Teorema del seno</div>
+    <div class="name">Prof. F. Giovanny Quiazúa M.</div>
+    <div style="margin-top:6px">© 2026 · Ejercicios de práctica. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="modalTitle">Título</h3>
+      <button class="modal-x" type="button" id="modalX" aria-label="Cerrar">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<script>
+"use strict";
+
+const CATS = [
+  {
+    letter: "A",
+    color: "#0d9488",
+    title: "Fundamentos del teorema del seno",
+    skills: [
+      { c:"A.1", t:"Enunciado del teorema del seno", q:"En cualquier triángulo $ABC$, el teorema del seno establece que:", a:["$\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}$","$a^2=b^2+c^2-2bc\\cos A$","$\\sin A+\\sin B+\\sin C=1$","$\\dfrac{a}{\\cos A}=\\dfrac{b}{\\cos B}$"], ok:0 },
+      { c:"A.2", t:"Correspondencia lado-ángulo", q:"En el teorema del seno, el lado $a$ se relaciona con:", a:["El ángulo $A$, que es opuesto a $a$","El ángulo adyacente a $a$","Cualquier ángulo","El ángulo $B$"], ok:0 },
+      { c:"A.3", t:"Suma de ángulos internos", q:"Si en un triángulo $A=40^\\circ$ y $B=60^\\circ$, entonces $C=$", a:["$80^\\circ$","$100^\\circ$","$60^\\circ$","$40^\\circ$"], ok:0 },
+      { c:"A.4", t:"Cuándo aplicar el teorema del seno", q:"El teorema del seno es especialmente útil cuando se conocen:", a:["Dos ángulos y un lado (AAL/ALA), o dos lados y un ángulo opuesto (LLA)","Los tres lados (LLL)","Dos lados y el ángulo comprendido (LAL)","Solo los tres ángulos"], ok:0 },
+      { c:"A.5", t:"Plantear la proporción", q:"Si se conocen $A$, $B$ y $a$, para hallar $b$ se usa:", a:["$\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}$","$\\dfrac{a}{\\sin B}=\\dfrac{b}{\\sin A}$","$a\\sin A=b\\sin B$","$\\dfrac{a}{B}=\\dfrac{b}{A}$"], ok:0 },
+      { c:"A.6", t:"Despejar un lado", q:"De $\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}$, al despejar $b$ se obtiene:", a:["$b=\\dfrac{a\\sin B}{\\sin A}$","$b=\\dfrac{a\\sin A}{\\sin B}$","$b=\\dfrac{\\sin B}{a\\sin A}$","$b=a\\sin A\\sin B$"], ok:0 }
+    ]
+  },
+  {
+    letter: "B",
+    color: "#2563eb",
+    title: "Cálculo de lados y ángulos",
+    skills: [
+      { c:"B.1", t:"Hallar un lado (AAL)", q:"Si $A=30^\\circ$, $B=45^\\circ$ y $a=10$, entonces $b=\\dfrac{10\\sin 45^\\circ}{\\sin 30^\\circ}$. Como $\\sin 30^\\circ=\\frac{1}{2}$, esto es:", a:["$20\\sin 45^\\circ$","$5\\sin 45^\\circ$","$10\\sin 45^\\circ$","$\\dfrac{\\sin 45^\\circ}{20}$"], ok:0 },
+      { c:"B.2", t:"Hallar el tercer ángulo y un lado", q:"Si $A=50^\\circ$, $B=70^\\circ$, entonces $C=60^\\circ$. Para hallar $c$ conociendo $a$, se usa:", a:["$c=\\dfrac{a\\sin 60^\\circ}{\\sin 50^\\circ}$","$c=\\dfrac{a\\sin 50^\\circ}{\\sin 60^\\circ}$","$c=\\dfrac{a\\sin 70^\\circ}{\\sin 50^\\circ}$","$c=a\\sin 60^\\circ$"], ok:0 },
+      { c:"B.3", t:"Hallar un ángulo (LLA)", q:"Si $a=8$, $b=10$ y $A=30^\\circ$, entonces $\\sin B=$", a:["$\\dfrac{10\\sin 30^\\circ}{8}$","$\\dfrac{8\\sin 30^\\circ}{10}$","$\\dfrac{10}{8\\sin 30^\\circ}$","$\\dfrac{\\sin 30^\\circ}{80}$"], ok:0 },
+      { c:"B.4", t:"Calcular $\\sin B$ numéricamente (idea)", q:"Con $\\sin B=\\dfrac{10\\sin 30^\\circ}{8}=\\dfrac{10\\cdot 0.5}{8}$, se obtiene:", a:["$\\sin B=0.625$","$\\sin B=1.25$","$\\sin B=0.4$","$\\sin B=0.8$"], ok:0 },
+      { c:"B.5", t:"Interpretar el valor del seno", q:"Si al aplicar el teorema del seno se obtiene $\\sin B=1.25$, esto significa que:", a:["No existe un triángulo con esos datos","$B=125^\\circ$","Hay dos soluciones","$B=90^\\circ$"], ok:0 },
+      { c:"B.6", t:"Usar proporciones equivalentes", q:"Si $\\dfrac{a}{\\sin A}=\\dfrac{c}{\\sin C}$, $A=45^\\circ$, $C=45^\\circ$ y $a=7$, entonces $c=$", a:["$7$","$7\\sqrt{2}$","$\\frac{7}{\\sqrt{2}}$","$14$"], ok:0 }
+    ]
+  },
+  {
+    letter: "C",
+    color: "#7c3aed",
+    title: "Casos de aplicación y caso ambiguo (LLA)",
+    skills: [
+      { c:"C.1", t:"Caso ALA", q:"Se conoce un lado y los dos ángulos adyacentes (ALA). Para usar el teorema del seno, primero se puede:", a:["Hallar el tercer ángulo con $A+B+C=180^\\circ$","Aplicar Pitágoras","Hallar el área directamente","No se puede resolver"], ok:0 },
+      { c:"C.2", t:"Caso AAL", q:"En el caso AAL (dos ángulos y un lado no comprendido), el teorema del seno:", a:["Permite hallar directamente otro lado con una proporción","No aplica","Solo da el área","Requiere el teorema del coseno obligatoriamente"], ok:0 },
+      { c:"C.3", t:"Caso ambiguo (LLA)", q:"El caso LLA (dos lados y un ángulo opuesto a uno de ellos) se llama ambiguo porque:", a:["Puede producir 0, 1 o 2 triángulos posibles","Siempre tiene dos soluciones","Nunca tiene solución","Siempre tiene solución única"], ok:0 },
+      { c:"C.4", t:"Análisis del caso ambiguo", q:"En LLA, si $\\sin B>1$ al calcularlo, entonces:", a:["No hay triángulo solución","Hay dos triángulos","Hay un triángulo rectángulo","$B=90^\\circ$"], ok:0 },
+      { c:"C.5", t:"Seno y ángulo suplementario", q:"Si $\\sin B=0.5$, una posibilidad es $B=30^\\circ$. Otra posible (en $(0^\\circ,180^\\circ)$) es:", a:["$150^\\circ$","$210^\\circ$","$330^\\circ$","$60^\\circ$"], ok:0 },
+      { c:"C.6", t:"Verificar la segunda solución", q:"En el caso ambiguo, la solución $B'$ (suplementaria) es válida solo si:", a:["$A+B'<180^\\circ$","$B'>90^\\circ$ siempre","$\\sin B'<0$","$A=B'$"], ok:0 }
+    ]
+  },
+  {
+    letter: "D",
+    color: "#dc2626",
+    title: "Aplicaciones y problemas",
+    skills: [
+      { c:"D.1", t:"Resolver un triángulo (idea general)", q:"Resolver un triángulo significa:", a:["Hallar todos sus lados y ángulos desconocidos","Hallar solo su área","Dibujarlo a escala","Calcular solo un lado"], ok:0 },
+      { c:"D.2", t:"Aplicación con datos dados", q:"Si $B=35^\\circ$, $C=65^\\circ$ y $b=12$, entonces $A=80^\\circ$ y $a=$", a:["$\\dfrac{12\\sin 80^\\circ}{\\sin 35^\\circ}$","$\\dfrac{12\\sin 35^\\circ}{\\sin 80^\\circ}$","$\\dfrac{12\\sin 65^\\circ}{\\sin 35^\\circ}$","$12\\sin 80^\\circ$"], ok:0 },
+      { c:"D.3", t:"Elección del método", q:"Si conoces dos lados y el ángulo comprendido (LAL), el método más directo suele ser:", a:["Teorema del coseno","Teorema del seno únicamente","Solo suma de ángulos","Pitágoras sin más"], ok:0 },
+      { c:"D.4", t:"Triángulo isósceles con teorema del seno", q:"Si $a=b$ en un triángulo, por el teorema del seno se deduce que:", a:["$\\sin A=\\sin B$ (y en un triángulo, $A=B$)","$A+B=90^\\circ$","$C=90^\\circ$","$a=\\sin A$"], ok:0 },
+      { c:"D.5", t:"Consistencia de datos", q:"Antes de aplicar el teorema del seno para hallar un ángulo, es importante recordar que:", a:["$\\sin$ de un ángulo de un triángulo debe estar entre $0$ y $1$","$\\sin$ puede ser mayor que $1$","Los ángulos pueden sumar más de $180^\\circ$","Un lado puede ser negativo"], ok:0 },
+      { c:"D.6", t:"Área con seno (relación útil)", q:"Una fórmula de área relacionada es $\\text{Área}=\\frac{1}{2}bc\\sin A$. Esto complementa al teorema del seno porque:", a:["Usa un ángulo y los dos lados que lo forman","Usa los tres lados","Requiere solo ángulos","Solo funciona en triángulos rectángulos"], ok:0 }
+    ]
+  }
+];
+
+const skillsEl=document.getElementById("skills"), searchEl=document.getElementById("search"), rcEl=document.getElementById("rc");
+CATS.forEach(cat=>{
+  const section=document.createElement("section");
+  section.className="cat"; section.dataset.letter=cat.letter; section.style.setProperty("--cc",cat.color); section.dataset.title=cat.title.toLowerCase();
+  const head=document.createElement("div"); head.className="cat-head";
+  head.innerHTML=`<div class="cat-letter">${cat.letter}</div><h2>${cat.title}</h2><span class="count">${cat.skills.length} competencias</span>`;
+  section.appendChild(head);
+  const ul=document.createElement("ul"); ul.className="cat-skills";
+  cat.skills.forEach(s=>{
+    const li=document.createElement("li"); li.className="skill";
+    li.dataset.search=(cat.letter+" "+s.c+" "+s.t+" "+cat.title).toLowerCase();
+    li.innerHTML=`<div class="skill-code">${s.c}</div><a class="skill-name" href="#">${s.t}</a><span class="hint">Practicar ›</span>
+      <div class="pop"><div class="q-label">Pregunta de ejemplo · ${s.c}</div><div class="q">${s.q}</div>
+      <div class="answers">${s.a.map((ans,i)=>`<div class="ans${i===s.ok?' ok':''}">${ans}</div>`).join("")}</div><div class="caret"></div></div>`;
+    li.__cat=cat; li.__skill=s; ul.appendChild(li);
+  });
+  section.appendChild(ul); skillsEl.appendChild(section);
+});
+
+function typeset(el){ if(window.MathJax && MathJax.typesetPromise){ MathJax.typesetPromise([el]).catch(()=>{}); } }
+typeset(document.body);
+
+const modal=document.getElementById("modal"), modalTitle=document.getElementById("modalTitle"), modalBody=document.getElementById("modalBody"), modalFoot=document.getElementById("modalFoot");
+function openModal(title,body,foot){ modalTitle.textContent=title; modalBody.innerHTML=body; modalFoot.innerHTML=foot||""; modal.classList.add("open"); typeset(modalBody); }
+function closeModal(){ modal.classList.remove("open"); }
+document.getElementById("modalX").addEventListener("click",closeModal);
+modal.addEventListener("click",e=>{ if(e.target===modal) closeModal(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
+
+function toast(msg){ const wrap=document.getElementById("toasts"); const t=document.createElement("div"); t.className="toast"; t.textContent=msg; wrap.appendChild(t); requestAnimationFrame(()=>t.classList.add("show")); setTimeout(()=>{t.classList.remove("show"); setTimeout(()=>t.remove(),250);},2600); }
+
+let score={ok:0,total:0};
+try{ const raw=JSON.parse(localStorage.getItem("ung_teorema_seno_score_v1")); if(raw&&typeof raw.ok==="number") score=raw; }catch(e){}
+function saveScore(){ try{ localStorage.setItem("ung_teorema_seno_score_v1",JSON.stringify(score)); }catch(e){} }
+function paintScore(){ document.getElementById("scorePill").textContent=score.ok+" / "+score.total; }
+document.getElementById("resetScore").addEventListener("click",()=>{ score={ok:0,total:0}; saveScore(); paintScore(); toast("Puntuación reiniciada"); });
+paintScore();
+
+function openPractice(cat,s){
+  const order=s.a.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+  const correctPos=order.indexOf(s.ok);
+  const answers=order.map((orig,pos)=>`<button type="button" data-i="${pos}">${s.a[orig]}</button>`).join("");
+  openModal(s.c+" · "+cat.title,
+    `<div class="prac-q">${s.t}</div><div class="prac-sub">${s.q}</div><div class="prac-ans" id="pracAns">${answers}</div><div class="prac-fb" id="pracFb"></div>`,
+    `<button class="btn" type="button" id="pracClose">Cerrar</button><button class="btn solid" type="button" id="pracNext">Siguiente competencia</button>`);
+  document.getElementById("pracClose").addEventListener("click",closeModal);
+  document.getElementById("pracNext").addEventListener("click",()=>nextSkill(cat,s));
+  const fb=document.getElementById("pracFb");
+  document.querySelectorAll("#pracAns button").forEach(btn=>btn.addEventListener("click",()=>{
+    const right=Number(btn.dataset.i)===correctPos;
+    score.total++; if(right) score.ok++; saveScore(); paintScore();
+    document.querySelectorAll("#pracAns button").forEach((b,i)=>{ b.disabled=true; if(i===correctPos) b.classList.add("good"); });
+    if(!right) btn.classList.add("bad");
+    fb.className="prac-fb "+(right?"good":"bad");
+    fb.textContent=right?"¡Correcto!":"Incorrecto. La respuesta correcta está en verde.";
+  }));
+}
+function nextSkill(cat,s){ const next=cat.skills[(cat.skills.indexOf(s)+1)%cat.skills.length]; openPractice(cat,next); }
+
+skillsEl.addEventListener("click",e=>{
+  const li=e.target.closest(".skill"); if(!li) return; e.preventDefault();
+  document.querySelectorAll(".skill.sel").forEach(x=>x!==li&&x.classList.remove("sel"));
+  li.classList.add("sel"); openPractice(li.__cat,li.__skill);
+});
+
+function renderCount(){
+  const q=searchEl.value.trim().toLowerCase(); let shown=0;
+  document.querySelectorAll(".cat").forEach(sec=>{
+    let vis=0;
+    sec.querySelectorAll(".skill").forEach(s=>{
+      const ok=!q||s.dataset.search.includes(q)||sec.dataset.title.includes(q)||sec.dataset.letter.toLowerCase()===q;
+      s.style.display=ok?"":"none"; if(ok) vis++;
+    });
+    sec.style.display=vis?"":"none"; shown+=vis;
+  });
+  rcEl.textContent=shown+" competencias"+(q?` con "${searchEl.value.trim()}"`:"")+" en 4 categorías";
+}
+searchEl.addEventListener("input",renderCount); renderCount();
+</script>
+</body>
+</html>
